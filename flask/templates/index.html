@@ -1,0 +1,295 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Tumor Detection</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000000; /* Black background color */
+            color: #ffffff; /* White text color */
+        }
+
+        div {
+            background-color: #222222; /* Dark gray background color for the form container */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Box shadow for a subtle lift */
+            text-align: center;
+        }
+
+        h1 {
+			color: #ffffff; /* White heading color */
+			margin-bottom: 10px; /* Reduced margin */
+		}
+
+        label {
+            color: #aaaaaa; /* Light gray label color */
+        }
+
+        input, button {
+            margin-top: 10px;
+            padding: 8px;
+            border: 1px solid #666666; /* Medium gray border */
+            border-radius: 4px;
+            background-color: #333333; /* Dark gray background color */
+            color: #ffffff; /* White text color */
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4caf50; /* Green button color */
+            cursor: pointer;
+        }
+
+        h2, p {
+            color: #ffffff; /* White text color */
+			margin: 5px 0; /* Reduced margin */
+        }
+
+        img {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+
+        .result-container {
+            margin-top: 10px;
+        }
+
+        .result-image {
+            max-width: 200px; /* Set the maximum width for the result image */
+            margin-top: 10px;
+        }
+
+        a {
+            color: #4caf50; /* Green link color */
+            text-decoration: none;
+            display: block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+        <div>
+        <h1>Brain Tumor Detection</h1>
+        
+        <form action="/" method="post" enctype="multipart/form-data">
+            <label for="file">Choose an image:</label>
+            <br>
+            <input type="file" name="file" id="file" accept="image/*" required>
+            <br>
+            <button type="submit">Check for Tumor</button>
+        </form>
+
+        <div class="result-container">
+		
+		{% if uploaded_image_path %}
+        <img src="{{ url_for('uploaded_file', filename=uploaded_image_path) }}" alt="Selected Image" class="result-image">
+    {% endif %}<br/>
+		
+    {% if result %}
+        <h2>{{ result }}</h2>
+    {% endif %}
+
+    
+</div>
+
+
+        <a href="/">Back to Home</a>
+    </div>
+    </div>
+</body>
+</html>
+-->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Tumor Detection</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .top-bar {
+            width: 100%;
+            background-color:#803790;
+            color: white;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+		.top-bar-content {
+			padding: 0 20px;
+		}
+
+        .top-bar h1 {
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .top-bar-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .top-bar-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+
+        .container {            
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: #ffffff;
+            background-color: transparent;
+            margin: 0 auto;  
+        }
+
+		label {
+			color: #aaaaaa;
+			font-size:20px;
+		}
+		.background-left
+		{
+			position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 35%; /* Half of the container width */
+            margin-top:50px;
+			background-size: 200px;
+            background-position: center;
+            background-repeat: no-repeat;
+		}
+		
+        .background-right {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 35%; /* Half of the container width */
+            margin-top:50px;
+			background-size: 300px;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .background-left {
+            left: 0;
+            background-image: url('static/bg1.png'); /* Path to your left background image */
+        }
+        .background-right {
+            right: 0;
+            background-image: url('static/bg2.png'); /* Path to your right background image */
+        }
+		
+		@media screen and (max-width: 1000px) {
+		.background-left,
+		.background-right {
+			display: none;
+		}
+		}
+		input {
+			align:center;
+            margin-top: 15px; /* Increased margin */
+            padding: 8px; /* Increased padding */ 
+            color: black;
+			margin-left:100px;
+            font-size: 16px; /* Increased font size */
+        }
+		button {
+            margin-top: 12px; /* Increased margin */
+            padding: 8px; /* Increased padding */ 
+            border: 2px solid black;
+            color: #ffffff;
+            font-size: 20px; /* Increased font size */
+			font-weight: bold;
+			width:350px;
+			cursor:pointer;
+			border-radius:15px;
+			background-color: #803790;	
+        }		
+        h2, p {
+            color: red;
+            margin: 10px 0; /* Increased margin */
+        }
+		.result-container {
+            margin-top: 10px; /* Increased margin */
+        }
+		.result-image {
+        max-width: 230px; /* Increase the max-width */
+        width: 100%; /* Ensure the image fills its container */
+        margin-top: 5px; /* Adjusted margin */
+		}
+        .home-link {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+		.symptoms-link {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+		.custom-file-upload {
+		    background-color: white; /* White background */
+            color: #333333; /* Dark text color */
+            font-size: 20px;
+		}
+    </style>
+</head>
+<body>
+
+<div class="background-left"></div>
+<div class="background-right"></div>
+
+<div class="top-bar">
+    <div class="top-bar-content">
+        <h1>Brain Tumor Detection</h1>
+    </div>
+    <div class="top-bar-links">
+        <a href="/symptoms" class="symptoms-link">Symptoms</a>
+        <a href="/" class="home-link">Home</a>
+    </div>
+</div>
+<div class="container">
+    <h1>Brain Tumor Detection</h1>
+    <form action="/" method="post" enctype="multipart/form-data">
+	<label for="file">Upload MRI image of Brain:<br/></label>
+        <!-- Custom file upload button -->
+        <label for="file" class="custom-file-upload">
+           <input type="file" name="file" id="file" accept="image/*" required>
+        </label>
+		<br>
+        <button type="submit">Check Tumor Status</button>
+    </form>
+	<div class="result-container">
+        {% if uploaded_image_path %}
+            <img src="{{ url_for('uploaded_file', filename=uploaded_image_path) }}" alt="Selected Image" class="result-image">
+        {% endif %}
+        
+        {% if result %}
+			<h2><span style="color:#803790;text-decoration:underline">Result:</span>&nbsp;{{ result }}</h2>
+        {% endif %}
+    </div>
+</div>
+</body>
+</html>
